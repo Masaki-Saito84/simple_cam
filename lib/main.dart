@@ -29,8 +29,13 @@ class _MyHomePageState extends State<MyHomePage> {
   File? _image;
   final picker = ImagePicker();
 
-  void _incrementCounter() {
+  Future getImageFromCam() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
     setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      }
     });
   }
 
@@ -45,10 +50,16 @@ class _MyHomePageState extends State<MyHomePage> {
           ? Text('写真がありません')
           : Image.file(_image!),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: Column(
+        verticalDirection: VerticalDirection.up,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          FloatingActionButton(
+            onPressed: getImageFromCam,
+            child: Icon(Icons.add_a_photo),
+          ),
+        ],
+      )
     );
   }
 }
