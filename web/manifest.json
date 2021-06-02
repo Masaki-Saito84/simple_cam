@@ -1,6 +1,6 @@
 {
-    "name": "simple_cam_",
-    "short_name": "simple_cam_",
+    "name": "simplecam",
+    "short_name": "simplecam",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

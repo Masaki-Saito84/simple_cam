@@ -1,4 +1,4 @@
-# simple_cam_
+# simplecam
 
 A new Flutter project.
 
