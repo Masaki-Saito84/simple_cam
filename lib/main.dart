@@ -39,6 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Future getImageFromLib() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,6 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: getImageFromCam,
             child: Icon(Icons.add_a_photo),
           ),
+          Container(
+            margin: EdgeInsets.only(bottom: 16.0),
+            child: FloatingActionButton(
+              onPressed: getImageFromLib,
+              child: Icon(Icons.photo_library),
+            ),
+          )
         ],
       )
     );
