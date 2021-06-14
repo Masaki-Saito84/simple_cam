@@ -60,10 +60,29 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: _image == null
-          ? Text('写真がありません')
-          : Image.file(_image!),
+      body: _image == null ?
+          Center(
+            child: Text('写真がありません')
+          )
+          :  Column(
+        verticalDirection: VerticalDirection.up,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Center(
+            child: ElevatedButton(
+              child: Text('保存する'),
+              onPressed: () async {
+                if(_image != null) {
+                  Uint8List _buffer = await _image!.readAsBytes();
+                  final result = await ImageGallerySaver.saveImage(_buffer);
+                }
+              },
+            ),
+          ),
+          Center(
+            child: Image.file(_image!),
+          ),
+        ]
       ),
       floatingActionButton: Column(
         verticalDirection: VerticalDirection.up,
